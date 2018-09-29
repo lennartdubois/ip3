@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="578" height="400"></canvas>
+    <a href="blacksquare.html">link text</a>
+
+    <script>
+      window.addEventListener('load', function(ev) {
+        var sourceimage = document.querySelector('img');
+        var canvas = document.querySelector('canvas');
+        var zoomcanvas = document.querySelectorAll('canvas')[1];
+        var context = canvas.getContext('2d');
+        var zoomcontext = zoomcanvas.getContext('2d');
+        canvas.height = sourceimage.height;
+        zoomcanvas.height = sourceimage.height * 2;
+        canvas.width = sourceimage.width;
+        zoomcanvas.width = sourceimage.width;
+        zoomcontext.imageSmoothingEnabled = false; 
+        zoomcontext.mozImageSmoothingEnabled = false; 
+        zoomcontext.webkitImageSmoothingEnabled = false; 
+        zoomcontext.msImageSmoothingEnabled = false; 
+        context.drawImage(sourceimage, 0, 0);
+        sourceimage.style.display = 'none';
+    
+      function pxzoom(ev) {
+        var x = ev.layerX;
+        var y = ev.layerY;
+        zoomcontext.drawImage(
+          canvas, Math.abs(x - 5), Math.abs(y - 5), 10, 10,
+          0, 0, 200, 200)
+    }
+    canvas.addEventListener('mousemove', pxzoom, false);
+  },false);
+    </script>
+  </body>
+</html> 
