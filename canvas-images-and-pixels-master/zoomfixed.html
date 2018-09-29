@@ -34,9 +34,7 @@
       var x = ev.layerX;
       var y = ev.layerY;
       zoomcontext.drawImage(
-        canvas, Math.abs(x - 5), Math.abs(y - 5), 10, 10,
-        0, 0, 200, 200
-      );
+        canvas, Math.abs(x - 5), Math.abs(y - 5), 10, 10, 0, 0, 200, 200);
     }
     canvas.addEventListener('mousemove', pxzoom, false);
   },false);
