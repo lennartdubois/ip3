@@ -1,0 +1,119 @@
+﻿/******************************************************************************
+ * EDIT.CSS
+ * --------
+ *
+ * Stylesheet voor invulformulieren
+ *
+ * F. Vander Meiren
+ *
+ * 01/10/2011
+ * 12/02/2013
+ ******************************************************************************/
+
+
+.label
+{
+  height: 1.1em;
+  padding: 0.25em 0.25em;
+  font-size: 0.9em;
+  color: #456;
+  background-color: #eee;
+  border: 1px solid #999;
+}
+
+.textbox
+{
+  height: 1.1em;
+  width: 40%;
+  padding: 0.25em 0.25em;
+  color: #00F;
+  background-color: #fff;
+  border: 1px solid #999;
+}
+.multiLineTextbox
+{
+  height: 5.0em;
+  width: 60%;
+  padding: 0.25em 0.25em;
+  color: #00F;
+  background-color: #fff;
+  border: 1px solid #999;
+}
+
+.dropdownlist
+{
+  height: 1.8em;
+  width: 30%;
+  color: #00F;
+  background-color: #fff;
+  border: 1px solid #999;
+}
+/*
+ * validator 
+ */
+.validator
+{
+  text-align: left;
+  padding: 0 2px 0 2px;
+  font-size: 0.9em;
+  font-weight: normal;
+  color: red;
+  height: auto;
+}
+/*
+ * Fieldset elements 
+ */ 
+fieldset
+{
+  width: 640px;
+  height: auto;
+  margin: 25px auto;
+  padding: 15px 0;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+fieldset p
+{
+  min-height: 1.8em;
+  clear: both;
+  margin: 0.6em 0.5em;
+}
+legend
+{
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 5px;
+  margin-left: 5px;
+}
+fieldset label
+{
+  width: 35%;
+  height: 1.1em;
+  float: left;
+  font-weight: normal;
+  padding-right: 0.8em;
+  text-align: right;
+  line-height: 1.8em;
+}
+fieldset .checkbox input
+{
+  float: left;
+  margin-top: 5px;
+}
+fieldset .checkbox label
+{
+  text-align: left;
+}
+fieldset td label
+{
+  width: 80px;
+  text-align: left;
+  float: right;
+}
+
+fieldset hr
+{
+  margin: 24px;
+  border: 1px solid #ccc;
+}
+

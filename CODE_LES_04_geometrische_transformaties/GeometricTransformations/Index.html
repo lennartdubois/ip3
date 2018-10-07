@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HTML 5 Canvas-based image histogram example</title>
+  <script src="Scripts/Dom.js"></script>
+  <script src="Scripts/Matrix.js"></script>
+  <script src="Scripts/GeometricTransformations.js"></script>
+  <script src="Scripts/Grid.js"></script>
+  <script>
+
+    window.onload = function () {
+      // transformation options
+      var angles = [90, 60, 45, 30, 0, -30, -45, -60, -90];
+      var scales = [0.25, 0.5, 1, 2, 4];
+      var orders = ['RST', 'RTS', 'SRT', 'STR', 'TRS', 'TSR'];
+
+      // controls
+      var imCanvas = $.get('imCanvas');
+      var ddlRotation = $.get('ddlRotation');
+      var ddlScale = $.get('ddlScale');
+      var ddlOrder = $.get('ddlOrder');
+      var btnDraw = $.get('btnDraw');
+      var log = $.get('matrix');
+
+      // set image canvas sizes
+      var parent = imCanvas.parentNode;
+      imCanvas.width = parent.clientWidth - 20;
+      imCanvas.height = parent.clientHeight - 20;
+
+      // Populate ddlScale
+      for (var i = 0; i < scales.length; i++) {
+        var option = document.createElement('option');
+        option.innerHTML = (scales[i] * 100.0).toString() + '%';
+        option.value = scales[i];
+        if (scales[i] === 0.5)
+          option.selected = true;
+        ddlScale.appendChild(option);
+      }
+
+      // Populate ddlRotation
+      for (var i = 0; i < angles.length; i++) {
+        var option = document.createElement('option');
+        option.innerHTML = angles[i].toString() + '°';
+        option.value = angles[i];
+        if (angles[i] === 0)
+          option.selected = true;
+        ddlRotation.appendChild(option);
+      }
+
+      // Populate ddlOrders
+      for (var i = 0; i < orders.length; i++) {
+        var option = document.createElement('option');
+        option.innerHTML = orders[i];
+        option.value = orders[i];
+        if (orders[i] === 'S-T-R')
+          option.selected = true;
+        ddlOrder.appendChild(option);
+      }
+
+      Grid.initialize(imCanvas, 117, 117, 100, 10);
+
+      // Do drawing
+      drawTransformedImage();
+
+      // set eventhandlers
+      btnDraw.addEventListener('click', drawTransformedImage, false);
+
+      function drawTransformedImage() {
+        var im = new Image();
+        im.src = "Assets/goldengate.jpg";
+        im.onload = function () {
+          var ctx = imCanvas.getContext('2d');
+          ctx.clearRect(0, 0, imCanvas.width, imCanvas.height);
+          ctx.save();
+
+          // draw axis
+          Grid.draw();
+
+          // derive new transformation matrix
+          var gt = new GeometricTransformations(
+            Number(tbxX.value), Number(tbxY.value),
+            Number(ddlRotation.value),
+            Number(ddlScale.value),
+            ddlOrder.value
+          );
+
+          // show the transformation matrix
+          log.innerHTML = gt.matrix.toHTML();
+
+          // transform coordinate system 
+          ctx.transform(
+            gt.matrix.a[0][0], gt.matrix.a[1][0],
+            gt.matrix.a[0][1], gt.matrix.a[1][1],
+            gt.matrix.a[0][2], gt.matrix.a[1][2]);
+
+          // draw the image on the transformed coordinate system
+          ctx.drawImage(im, 0, 0);
+
+          ctx.restore();
+        }
+      }
+
+    }
+  </script>
+  <link href="Styles/default.css" rel="stylesheet" />
+  <link href="Styles/edit.css" rel="stylesheet" />
+  <style>
+    #imCanvas
+    {
+      background-color: white;
+    }
+
+    .message
+    {
+      clear: both;
+      text-align: left;
+    }
+
+    fieldset
+    {
+      width: 256px;
+      _margin: 20px auto;
+    }
+
+      fieldset label
+      {
+        width: 50%;
+      }
+
+      fieldset p
+      {
+        padding: 0;
+      }
+
+      fieldset #matrix
+      {
+        display: block;
+        padding-left: 40px;
+      }
+
+    #fs2
+    {
+      height: 100px;
+    }
+
+    legend
+    {
+      padding: 0 10px;
+    }
+
+    .textbox
+    {
+      width: 20%;
+    }
+
+    .dropdownlist
+    {
+      width: 30%;
+    }
+
+    .button
+    {
+      width: 22%;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="header_wrapper">
+      <header>
+        <h1>Geometric Transformations</h1>
+      </header>
+    </div>
+    <div id="content_wrapper">
+      <div id="content" class="clearfix">
+        <aside>
+          <fieldset id="fs">
+            <legend>Settings:</legend>
+            <p>
+              <label for="tbxX">X-translation:</label>
+              <input id="tbxX" type="text" value="0" class="textbox" />
+            </p>
+            <p>
+              <label for="tbxY">Y-translation:</label>
+              <input id="tbxY" type="text" value="0" class="textbox" />
+            </p>
+            <p>
+              <label for="ddlRotation">Rotation:</label>
+              <select id="ddlRotation" class="dropdownlist"></select>
+            </p>
+            <p>
+              <label for="ddlScale">Scale:</label>
+              <select id="ddlScale" class="dropdownlist"></select>
+            </p>
+            <p>
+              <label for="ddlOrder">Order:</label>
+              <select id="ddlOrder" class="dropdownlist"></select>
+            </p>
+            <p>
+              <label for="btnDraw">&nbsp;</label>
+              <input id="btnDraw" type="button" class="button" value="Draw" />
+            </p>
+          </fieldset>
+          <fieldset id="fs2">
+            <legend>Transformation matrix:</legend>
+            <p id="matrix" />
+          </fieldset>
+        </aside>
+        <section>
+          <h2 id="subtitle">[subtitle]</h2>
+          <canvas id="imCanvas"></canvas>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

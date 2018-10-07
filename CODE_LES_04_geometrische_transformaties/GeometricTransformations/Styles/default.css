@@ -1,0 +1,284 @@
+﻿/*
+ * Default styles for course Image Processing II 
+ * F. Vander Meiren
+ *
+ * 15/01/2013
+ * 14/02/2013
+ * 28/10/2013
+ */
+
+/*
+ * Reset with normalize.css
+ */
+@import url('normalize.css');
+
+/*
+ * Import Google Web fonts
+ *
+ * (disabled)
+@import url('http://fonts.googleapis.com/css?family=Domine|Antic+Slab|Armata|Tienne|Oxygen|Pontano+Sans|Roboto:400,300|Capriola');
+ */
+
+/*
+ * Main selectors
+ */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #eef;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 80%;
+  font-weight: 400;
+  line-height: 1.6em;
+  color: #456;
+}
+
+p {
+  padding-top: 0.2em;
+}
+
+h1 {
+  font-size: 160%;
+  font-weight: 600;
+  color: #45A;
+  padding: 1.2em 0 0.2em 0;
+}
+
+h2 {
+  font-size: 140%;
+  font-weight: 600;
+  color: #d21;
+  padding: 0.8em 0 0.2em 0;
+}
+
+h3 {
+  font-size: 120%;
+  font-weight: 600;
+  color: #283;
+  padding: 0.4em 0 0 0;
+}
+
+h4 {
+  font-size: 100%;
+  font-weight: 600;
+  color: #456;
+  padding: 0.2em 0 0 0;
+}
+
+/*
+ * wrappers
+ */
+
+#wrap {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#header_wrapper {
+  background-color: #67D;
+}
+
+#nav_wrapper {
+  background-color: #4c4cf3;
+}
+
+#content_wrapper {
+}
+
+#content {
+  width: 960px;
+  height: auto;
+  margin: 20px auto;
+}
+
+#footer_wrapper {
+  background-color: #67D;
+}
+
+/*
+ * layout selectors
+ */
+
+header {
+  width: 960px;
+  height: 100px;
+  margin: auto;
+  padding: 20px 0;
+  text-align: center;
+}
+
+  header h1 {
+    color: white;
+    font-size: 240%;
+    font-weight: 700;
+  }
+
+nav {
+  width: 960px;
+  height: inherit;
+  margin: auto auto;
+  color: white;
+}
+
+aside {
+  width: 280px;
+  height: auto;
+  padding-top: 10px;
+  float: left;
+}
+
+section {
+  width: 660px;
+  height: 400px;
+  margin: auto auto;
+  float: left;
+  padding: 10px;
+}
+
+  section h2 {
+    display: block;
+    padding: 0 0 10px 0;
+    height: 20px;
+  }
+
+/*
+ * REMARK:
+ * For canvas elements, the CSS rules for width and height don't set 
+ * the actual size of the element but set the size of the pane in which the canvas 
+ * element will be drawn to the page. 
+ * The actual size is the size of the coordinate system or 'grid' that 
+ * the canvas API will use.
+ * The actual size can be set by defining the width and height 
+ * attributes. You can do this direct in HTML or via Javascript.
+ */
+canvas {
+  background-color: white;
+  _width: 400px; /* disabled, see remark */
+  _height: 300px; /* disabled, see remark */
+}
+
+footer {
+  width: 960px;
+  height: inherit;
+  margin: auto auto;
+  text-align: center;
+}
+
+  footer p {
+    font-size: 0.9em;
+    color: white;
+    padding: 30px 0;
+  }
+
+
+/*
+ * Nicolas Gallagher's Micro ClearFix.
+ * See: http://nicolasgallagher.com/micro-clearfix-hack/
+ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1; /* for IE 6/7 only */
+}
+
+/*
+ * Messages
+ */
+.message, .warning, .error {
+  display: block;
+  width: auto;
+  height: auto;
+  padding: 20px 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.message {
+  color: Green;
+}
+
+.warning {
+  color: Blue;
+}
+
+.error {
+  color: Red;
+}
+
+/*
+ * input elements (buttons, radios, checks, ...)
+ */
+.button_field {
+  width: auto;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.button, .button_small {
+  width: 10em;
+  margin: 1em 0;
+  text-align: center;
+  color: #F00;
+  background-color: #ff9;
+  border: 1px solid red;
+}
+
+.button {
+  height: 2em;
+  font-size: 0.9em;
+}
+
+.button_small {
+  height: 1.8em;
+  font-size: 0.8em;
+}
+
+  .button:hover, .button_small:hover {
+    background-color: #ffd;
+  }
+
+input[type="checkbox"],
+input[type="radio"] {
+  padding: 0 5px 0 15px;
+}
+
+
+/*
+  Fieldset elements
+  */
+fieldset {
+  width: 200px;
+  height: auto;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  text-align: left;
+}
+
+  fieldset label {
+    width: 75%;
+    text-align: left;
+  }
+
+  fieldset p {
+    display: block;
+    height: 1.5em;
+    padding: 0.5em 0 0.5em 0;
+  }
+
+legend {
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 0 5px;
+}
